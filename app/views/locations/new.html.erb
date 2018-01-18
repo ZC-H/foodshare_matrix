@@ -1,0 +1,10 @@
+<!--This page is only for testing, will get integrated into the new event page later --!>
+
+	<%= form_for @location do |f| %>
+	  <fieldset class="form-group">
+	    <%= f.label :address, 'Address' %>
+	    <%= f.text_field :address, class: "form-control" %>
+	  </fieldset>
+
+	  <%= f.submit 'Add!', class: 'btn btn-primary' %>
+	<% end %>
