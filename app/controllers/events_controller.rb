@@ -34,6 +34,12 @@ class EventsController < ApplicationController
 	end
 
 	def update
+		if @event.update_attributes(event_params)
+      redirect_to @event
+    else
+    	flash[:danger] = "Error updating event"
+      render 'edit'
+    end
 	end
 
 	private
