@@ -1,7 +1,11 @@
 class EventsController < ApplicationController
 	before_action	:find_event, only: [:show, :edit, :update]
 	def find_event
-		@event = Event.find(params[:id])
+		@event = Event.find_by_id(params[:id])
+		if !@event
+			#Put a real error page here later
+			redirect_to '/'
+		end
 	end
 
 	def index
@@ -14,13 +18,9 @@ class EventsController < ApplicationController
 	def create
 		@event = current_user.events.new(event_params)
 		@event.location_id = 1 #Edit this later
-		p "ccccccccccc"
-		p @event
 		if @event.save
 		  redirect_to @event
 		else
-			p "aaaaaaaaaaaaaaaa"
-			p @errors
 		  render 'new'
 
 		  #Flash errors here
