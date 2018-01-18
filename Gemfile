@@ -56,3 +56,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'clearance'
 gem 'figaro'
 gem 'geocoder'
+gem 'jquery-rails'

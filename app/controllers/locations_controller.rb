@@ -19,7 +19,7 @@ class LocationsController < ApplicationController
     @location = Location.new(location_params)
     if @location.save
       flash[:success] = "Place added!"
-      redirect_to root_path
+      redirect_to '/'
     else
       render 'new'
     end
