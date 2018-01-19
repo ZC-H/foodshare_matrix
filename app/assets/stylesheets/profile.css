@@ -9,6 +9,7 @@
 .profile-sidebar {
   padding: 20px 0 10px 0;
   background: #dfe3ee;
+  height: 100vh;
 }
 
 .profile-userpic img {
@@ -107,7 +108,7 @@
 /* Footer Content */
 .footer {
   padding: 10px;
-  background: #8b9dc3;
+  background: #dfe3ee;
   min-width: 100%;
   text-align: center;
 }
