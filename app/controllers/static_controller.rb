@@ -6,4 +6,7 @@ class StaticController < ApplicationController
   	end
   end
 
+  def feed
+  end
+
 end
