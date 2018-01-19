@@ -46,32 +46,33 @@
 										</div>
 									<%end%>
 									<!-- <form id="register-form" action="https://phpoll.com/register/process" method="post" role="form" style="display: none;"> -->
-									<%= form_tag '/sign_up', id: 'register-form' do%>
+									<%= form_for @user, :html => { :id => 'register-form' } do |f| %>
 										<div class="form-group">
-											<input type="text" name="name" id="username" tabindex="1" class="form-control" placeholder="Full Name" value="">
+											 <%= f.text_field :name, class: "form-control", placeholder: "Full Name",id: "username",tabindex: "1" %>
+										</div>
+										
+										<div class="form-group">
+											 <%= f.email_field :email, class: "form-control", placeholder: "Email Address",id: "email",tabindex: "1" %>
 										</div>
 										<div class="form-group">
-											<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
-										</div>
-										<div class="form-group">
-											<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+											 <%= f.password_field :password, class: "form-control", placeholder: "Password",id: "password",tabindex: "2" %>
 										</div>
 										<div class="form-group">
 											<label class="radio-inline">
-											      <input type="radio" name="optradio" value="community" required>Community
+											      <input type="radio" name="user[role]" value="0"  required>Community
 											    </label>
 											    <label class="radio-inline">
-											      <input type="radio" name="optradio" value="personal" required>Personal
+											      <input type="radio" name="user[role]" value="1" required>Personal
 											    </label>
 										</div>
 										<div class="form-group">
 											<div class="row">
 												<div class="col-sm-6 col-sm-offset-3">
-													<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn-success btn-register" value="Register Now">
+													<%= f.submit 'Register now', {class: 'form-control btn-success btn-register',name: 'register-submit', id:'register-submit', tabindex: '4'} %>
 												</div>
 											</div>
 										</div>
-									<%end%>
+									<% end %>
 								</div>
 							</div>
 						</div>
