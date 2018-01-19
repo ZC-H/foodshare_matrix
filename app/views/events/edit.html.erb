@@ -1,0 +1,13 @@
+<h1>Edit Event</h1>
+
+<%= form_for @event, :method => :put do |f| %>
+	<%= render partial: "form", :locals => {:f => f} %>
+
+  <p>
+    <%= f.submit "Update Event", :class => 'btn btn-primary btn-lg' %>
+  </p>
+    
+	
+<% end %>
+
+<!-- Need to be able to change location --!>
