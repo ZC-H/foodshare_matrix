@@ -1,6 +1,6 @@
 class StaticController < ApplicationController
 
-  def dashboard
+  def homedash
   end
 
 end
