@@ -17,7 +17,7 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-lg-12">
-									<%= form_for :session, url: session_path, id: 'login-form' do |f| %>
+									<%= form_for :session, url: session_path,:html => { :id => 'login-form' } do |f| %>
 										<div class="form-group">
 											<input type="text" name="session[email]" id="username" tabindex="1" class="form-control" placeholder="Email" value="">
 										</div>
@@ -31,7 +31,7 @@
 										<div class="form-group">
 											<div class="row">
 												<div class="col-sm-6 col-sm-offset-3">
-													<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn-primary btn-login" value="Log In" id="login-btn">
+													<%= f.submit 'Login', {class: 'form-control btn-success btn-login', id:'login-btn', tabindex: '4'} %>
 												</div>
 											</div>
 										</div>
@@ -44,7 +44,7 @@
 												</div>
 											</div>
 										</div>
-									<%end%>
+									<% end %>
 									<!-- <form id="register-form" action="https://phpoll.com/register/process" method="post" role="form" style="display: none;"> -->
 									<%= form_for @user, :html => { :id => 'register-form' } do |f| %>
 										<div class="form-group">
