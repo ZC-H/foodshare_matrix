@@ -17,6 +17,10 @@
 
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <% if current_user %>
+    <%= button_to 'Sign out', sign_out_path, {:method => :delete, :class => "btn navbar-btn"} %>
+  <% end %>
+
 </head>
 <body>
   <div id="header">
