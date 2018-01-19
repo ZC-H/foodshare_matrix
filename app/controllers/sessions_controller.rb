@@ -13,7 +13,9 @@ class SessionsController < Clearance::SessionsController
 	      redirect_back_or url_after_create
 	    else
 	      flash.now.notice = status.failure_message
-	      redirect '/sign_in', status: :unauthorized
+	      @user = User.new #Patch fix, there should be a better way to do this
+	      #Probably change render to redirect or something
+	      render template: "sessions/new", status: :unauthorized
 	    end
 	  end
 	end
