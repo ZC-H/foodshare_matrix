@@ -13,10 +13,10 @@ Rails.application.routes.draw do
 
   resources :users
 
+  root "static#homedash"
 
 
-
-
+  get "feed" => "static#feed"
 
 
   get "/sign_in" => "sessions#new", as: "sign_in"

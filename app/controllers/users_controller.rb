@@ -44,6 +44,29 @@ class UsersController < Clearance::UsersController
 		redirect_to @user
 	end 
 
+	#The below methods were originally written for sinatra, may need some changing
+	def follow
+		user = User.find_by_id(params[:id])
+		if !user or user == current_user
+			return "Error: Invalid user ID, or you tried to follow yourself"
+		end
+		if current_user.followtargets.include?(user)
+			return "You are already following this user."
+		end
+		current_user.followtarget_joins.create({followtarget_id: params[:id]})
+		redirect back
+	end
+
+	def unfollow
+		user = User.find_by_id(params[:id])
+		if !user or !current_user.followtargets.include?(user)
+			return "Error: Invalid user ID, or you are not following that user."
+		end
+		join = current_user.followtarget_joins.find_by(followtarget_id: params[:id])
+		join.delete
+		redirect back
+	end
+
 	private
 
   def user_params
