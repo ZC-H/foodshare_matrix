@@ -7,7 +7,14 @@
 	  <fieldset class="form-group">
 	    <%= f.label :address, 'Address' %>
 	    <%= f.text_field :address, class: "form-control" %>
-	  </fieldset>
+	  
+
+		<div class="col-sm-4">
+      <a href="#" id="find-from-address" class="btn btn-info btn-sm">Find from address</a>
+    </div>
+
+    </fieldset>
+
 		<div class="form-group row">
 		  <div class="col-sm-1">
 		    <%= f.label :latitude %>
@@ -27,13 +34,13 @@
 		</div>
 
 		<div class="col-sm-4">
-      <a href="#" id="find-on-map" class="btn btn-info btn-sm">Find on the map</a>
+      <a href="#" id="find-on-map" class="btn btn-info btn-sm">Find from coordinates</a>
     </div>
 
 	  <%= f.submit 'Add!', class: 'btn btn-primary' %>
 	<% end %>
 
-	<div class="card">
+	<div class="card" onload="initialize()" onunload="GUnload()">
 	  <div class="card-block">
 	    <div id="map" style="height:500px"></div>
 	  </div>
