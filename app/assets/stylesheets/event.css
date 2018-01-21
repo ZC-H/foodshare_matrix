@@ -1,0 +1,11 @@
+.event-form{
+	background-color: #D8DDEB;
+}
+
+#event-form-row{
+	padding-top: 5vh;
+	padding-bottom: 3vh;
+}
+#create-event-btn{
+	margin-left: 22vh;
+}
