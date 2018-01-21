@@ -1,5 +1,9 @@
 class BlogsController < ApplicationController
-	def index
-		render 'blogs#my_blog'
+	def myBlog
+		render 'blogs/my_blog'
+	end
+
+	def following
+		render 'blogs/following_blog'
 	end
 end

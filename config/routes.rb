@@ -27,5 +27,6 @@ Rails.application.routes.draw do
   resources :locations #May remove or restrict these later
 
   post "/sign_up" => "users#create"
-  get "/my_blog" => "blogs#index"
+  get "/my_blog" => "blogs#myBlog"
+  get "/following_blog" => "blogs#following"
 end
