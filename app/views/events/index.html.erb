@@ -37,22 +37,37 @@
                             <i class="glyphicon glyphicon-home"></i>
                             Home </a>
                         </li>
-                        <li>
-                            <a href="/events/new">
-                            <i class="glyphicon glyphicon-calendar"></i>
-                            Pick a Date </a>
-                        </li>
-                        <li>
-                            <a href="/feed">
-                            <i class="glyphicon glyphicon-flag"></i>
-                            Followers </a>
-                        </li>
-                        <li>
-                            <a href="#">
+
+                        <li class="dropdown active">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <i class="glyphicon glyphicon-th-large"></i>
-                             My Blogs</a>
+                             Events</a>
+                             <ul class="dropdown-menu" id="dropdown">
+                                 <li><a href="/events">Browse all events</a></li>
+                                 <li><%= link_to "My events", user_events_path(current_user) %>
+                                 </li>
+                                 <li><a href="/events/new">Create new event</a></li>
+                             </ul>
+                        </li>
+
+
+                        <li class="dropdown active">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="glyphicon glyphicon-th-large"></i>
+                             Blogs</a>
+                             <ul class="dropdown-menu" id="dropdown">
+                                 <li><a href="/my_blog">My Blog</a></li>
+                                 <li><a href="/following_blog">Following Blog</a></li>
+                                 <li><a href="#">Browse Blog</a></li>
+                             </ul>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">
+                            <i class="glyphicon glyphicon-log-out"></i>
+                            Logout</a>
                         </li>
                     </ul>
+
                 </div>
                 <!-- END MENU -->
             </div>
