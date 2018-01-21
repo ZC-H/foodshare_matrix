@@ -29,4 +29,5 @@ Rails.application.routes.draw do
   post "/sign_up" => "users#create"
   get "/my_blog" => "blogs#myBlog"
   get "/following_blog" => "blogs#following"
+  get "/browse_blog" => "blogs#browse"
 end
