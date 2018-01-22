@@ -1,13 +1,16 @@
-<!--This page is only for testing, will get integrated into the new event page later --!>
-
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcXbsgRxNKHEbdqU6WUdLA4vhUDbRPA9U&callback=initMap"
-  type="text/javascript"></script>
 
 	<%= form_for @location do |f| %>
 	  <fieldset class="form-group">
 	    <%= f.label :address, 'Address' %>
 	    <%= f.text_field :address, class: "form-control" %>
-	  </fieldset>
+	  
+
+		<div class="col-sm-4">
+      <a href="#" id="find-from-address" class="btn btn-info btn-sm">Find from address</a>
+    </div>
+
+    </fieldset>
+
 		<div class="form-group row">
 		  <div class="col-sm-1">
 		    <%= f.label :latitude %>
@@ -27,14 +30,102 @@
 		</div>
 
 		<div class="col-sm-4">
-      <a href="#" id="find-on-map" class="btn btn-info btn-sm">Find on the map</a>
+      <a href="#" id="find-on-map" class="btn btn-info btn-sm">Find from coordinates</a>
     </div>
 
 	  <%= f.submit 'Add!', class: 'btn btn-primary' %>
 	<% end %>
 
-	<div class="card">
+	<div class="card" onload="initialize()" onunload="GUnload()">
 	  <div class="card-block">
 	    <div id="map" style="height:500px"></div>
 	  </div>
 	</div>
+
+	<script>
+	var address_field, lat_field, lng_field, markersArray, placeMarkerAndPanTo, updateFields;
+
+	markersArray = [];
+
+	lat_field = $('#location_latitude');
+
+	lng_field = $('#location_longitude');
+
+	address_field = $('#location_address');
+
+	window.initMap = function() {
+	  var codeAddress, gcoder, map;
+	  if ($('#map').size() > 0) {
+	    map = new google.maps.Map(document.getElementById('map'), {
+	      center: {
+	        lat: 3.1390,
+	        lng: 101.6869
+	      },
+	      zoom: 17
+	    });
+	    gcoder = new google.maps.Geocoder;
+	    map.addListener('click', function(e) {
+	      placeMarkerAndPanTo(e.latLng, map);
+	      return updateFields(e.latLng);
+	    });
+	    $('#find-on-map').click(function(e) {
+	      e.preventDefault();
+	      return placeMarkerAndPanTo({
+	        lat: parseInt(lat_field.val(), 10),
+	        lng: parseInt(lng_field.val(), 10)
+	      }, map);
+	    });
+	    $('#find-from-address').click(function(e) {
+	      e.preventDefault();
+	      return codeAddress();
+	    });
+	    return codeAddress = function() {
+	      var address;
+	      address = $('#location_address').val();
+	      gcoder.geocode({
+	        'address': address
+	      }, function(results, status) {
+	        var marker;
+	        if (status === 'OK') {
+	          while (markersArray.length) {
+	            markersArray.pop().setMap(null);
+	          }
+	          marker = new google.maps.Marker({
+	            position: results[0].geometry.location,
+	            map: map
+	          });
+	          map.panTo(results[0].geometry.location);
+	          markersArray.push(marker);
+	          lat_field.val(null);
+	          lng_field.val(null);
+	        } else {
+	          alert('Geocode was not successful for the following reason: ' + status);
+	        }
+	      });
+	    };
+	  }
+	};
+
+	placeMarkerAndPanTo = function(latLng, map) {
+	  var marker;
+	  while (markersArray.length) {
+	    markersArray.pop().setMap(null);
+	  }
+	  marker = new google.maps.Marker({
+	    position: latLng,
+	    map: map
+	  });
+	  map.panTo(latLng);
+	  return markersArray.push(marker);
+	};
+
+	updateFields = function(latLng) {
+	  lat_field.val(latLng.lat());
+	  lng_field.val(latLng.lng());
+	  return address_field.val(null);
+	};
+</script>
+
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["MAP_KEY"] %>&callback=initMap"
+  type="text/javascript"></script>
