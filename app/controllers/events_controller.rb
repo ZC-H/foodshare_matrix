@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-	before_action	:find_event, only: [:show, :edit, :update]
+	before_action	:find_event, only: [:show, :edit, :update, :destroy]
 	def find_event
 		@event = Event.find_by_id(params[:id])
 		if !@event
@@ -9,6 +9,7 @@ class EventsController < ApplicationController
 	end
 
 	def index
+		@events = Event.all.order("updated_at DESC")
 	end
 
 	def new
@@ -41,6 +42,17 @@ class EventsController < ApplicationController
       render 'edit'
     end
 	end
+
+
+	def destroy
+		@event.destroy
+		redirect_to events_url
+
+	end
+
+
+
+
 
 	private
 	def event_params
