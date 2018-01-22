@@ -1,12 +1,5 @@
 
 
-<!-- Need to be able to change location --!>
-
-
-
-
-
-
 
 <div class="container-fluid">
     <div class="row profile">
@@ -37,7 +30,7 @@
                 </div>
                 <!-- END SIDEBAR BUTTONS -->
                 <!-- SIDEBAR MENU -->
-                 <div class="profile-usermenu">
+                <div class="profile-usermenu">
                     <ul class="nav">
                         <li class="active">
                             <a href="#">
@@ -85,26 +78,27 @@
         <div class="col-md-10">
             <div class="profile-content">
 
-            
-			<div class="well">
+            <% @events.each do |event| %>
+			  		
+			      
+						<div class="well">
 
-				<h1>Edit Event</h1>
+							<h4><%= link_to event.name, event_path(event) %></h4>
+							<p>Posted by: <%= event.user.name %></p>
+							<p>Location name: <%= event.location.name %></p>
+							<p>Event description: <%= event.description %></p>
+							<p><%= link_to "More info", event_path(event) %></p>
+							
 
-				<%= form_for @event, :method => :put do |f| %>
-					<%= render partial: "form", :locals => {:f => f} %>
-
-				  <p>
-				    <%= f.submit "Update Event", :class => 'btn btn-primary btn-lg' %>
-				    <%= link_to "Cancel", event_path, :class => 'btn btn-primary btn-lg' %>
-				  </p>
-				    
+						</div>
+						<div class="line"></div>
 					
 				<% end %>
-
-			
-
               
 
+                
+
+                
             
 
             </div>
