@@ -1,3 +1,8 @@
+	<div class="card" onload="initialize()" onunload="GUnload()">
+	  <div class="card-block">
+	    <div id="map" style="height:500px"></div>
+	  </div>
+	</div>
 
 	<%= form_for @location do |f| %>
 	  <fieldset class="form-group">
@@ -27,20 +32,15 @@
 		  <div class="col-sm-3">
 		    <%= f.text_field :longitude, class: "form-control" %>
 		  </div>
-		</div>
+		
 
-		<div class="col-sm-4">
-      <a href="#" id="find-on-map" class="btn btn-info btn-sm">Find from coordinates</a>
-    </div>
+			<div class="col-sm-4">
+	      <a href="#" id="find-on-map" class="btn btn-info btn-sm">Find from coordinates</a>
+	    </div>
 
-	  <%= f.submit 'Add!', class: 'btn btn-primary' %>
-	<% end %>
-
-	<div class="card" onload="initialize()" onunload="GUnload()">
-	  <div class="card-block">
-	    <div id="map" style="height:500px"></div>
+		  <%= f.submit 'Add!', class: 'btn btn-primary' %>
 	  </div>
-	</div>
+	<% end %>
 
 	<script>
 	var address_field, lat_field, lng_field, markersArray, placeMarkerAndPanTo, updateFields;
