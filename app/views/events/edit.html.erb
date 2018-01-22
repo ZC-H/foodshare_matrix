@@ -5,20 +5,48 @@
             <div class="profile-content">
 
             
-			<div class="well">
 
-				<h1>Edit Event</h1>
+			
 
-				<%= form_for @event, :method => :put do |f| %>
-					<%= render partial: "form", :locals => {:f => f} %>
 
-				  <p>
-				    <%= f.submit "Update Event", :class => 'btn btn-primary btn-lg' %>
-				    <%= link_to "Cancel", event_path, :class => 'btn btn-primary btn-lg' %>
-				  </p>
-				    
-					
-				<% end %>
+
+
+
+
+
+
+					<div id="postlist" id="post-box">
+                        <div class="panel" id="post-border">
+                            <div class="panel-heading">
+                                <div class="text-center">
+                                    <div class="row">
+                                        <div class="col-sm-9">
+                                                <h3 class="pull-left">Edit Event</h3>
+                                        </div>
+                                        <div class="col-sm-3">
+                                                <h4 class="pull-right">
+                                                <small><em><br></em></small>
+                                                </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                
+	                        <div class="panel-body">
+	                             	<%= form_for @event, :method => :put do |f| %>
+										<%= render partial: "form", :locals => {:f => f} %><br>
+
+											<p>
+											    <%= f.submit "Update Event", :class => 'btn btn-primary btn-lg' %>
+											    <%= link_to "Cancel", event_path, :class => 'btn btn-primary btn-lg' %>
+											</p>
+							
+								    
+									
+									<% end %>
+	                        </div>
+                        </div>
+                    </div>
 
 			
 
@@ -33,6 +61,8 @@
 
     </div>
 </div>
+
+
 
 
 <div class="container-fluid">
