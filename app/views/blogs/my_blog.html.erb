@@ -4,6 +4,7 @@
     <div class="row profile">
         <!-- PAGE CONTENT -->
         <div class="col-md-10">
+            <h3>My Blog</h3>
             <div class="profile-content">
 				<div class="event-form">
 					<div class="row">
@@ -13,7 +14,6 @@
 						<div class="col-lg-3"></div>
 					</div>
 					<div class="row" id="event-form-row">
-                        <h2>My Blog</h2>
 						<div class="col-lg-12">
     						<div class="widget-area no-padding blank">
                                 <div class="status-upload">
@@ -42,14 +42,28 @@
                             <div class="panel-heading">
                                 <div class="text-center">
                                     <div class="row">
-                                        <div class="col-sm-9">
-                                            <h3 class="pull-left"><%= b.title %></h3>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <h4 class="pull-right">
+                                        <div class="col-sm-9" id="blog-card">
+                                            <h3 class="pull-left"><%= b.title %>
+                                            </h3>
+                                            <h4 class="pull-left">
                                             <small><em>
                                                 <%= b.created_at %><br></em></small>
                                             </h4>
+                                            
+                                        </div>
+                                        <div class="col-sm-3" id ="delete-option">
+                                            <ul class="pull-right">
+                                                <li class="nav-item dropdown">
+                                                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="glyphicon glyphicon-option-horizontal"></i>
+
+                                                    </a>
+                                                    <ul class="dropdown-menu" id="blog-option">
+                                                        <li><a href="#">Edit</a></li>
+                                                        <li><a href="#">Delete</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
