@@ -8,23 +8,58 @@
         <div class="col-md-10">
             <div class="profile-content">
 
-            <% @events.each do |event| %>
-			  		
-			      
-						<div class="well">
+           
+				 <% @events.each do |event| %>
 
-							<h4><%= link_to event.name, event_path(event) %></h4>
-							<p>Posted by: <%= event.user.name %></p>
-							<p>Location name: <%= event.location.name %></p>
-							<p>Event description: <%= event.description %></p>
-							<p><%= link_to "More info", event_path(event) %></p>
-							
 
-						</div>
-						<div class="line"></div>
-					
-				<% end %>
+
+				
+                        <div id="postlist" id="post-box">
+                            <div class="panel" id="post-border">
+                                <div class="panel-heading">
+                                    <div class="text-center">
+                                        <div class="row">
+                                            <div class="col-sm-9">
+                                                <h3 class="pull-left"><%= link_to event.name, event_path(event) %> </h3>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <h4 class="pull-right">
+                                                <small><em><%= event.updated_at.localtime.to_date %><br><%= event.updated_at.localtime.strftime(" %H:%M:%S") %></em></small>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+	                            <div class="panel-body">
+	                                <p>Posted by: <%= event.user.name %></p>
+									<p>Location name: <%= event.location.name %></p>
+									<p>Event description: <%= event.description %></p>
+									<p><%= link_to "More info", event_path(event) %></p>
+	                            </div>
+                       		 </div>
+
+                        <div class="line"></div>
+                   
+
+
+
+
+
+                <% end %>
               
+
+
+
+
+
+
+
+
+
+
+
+
 
                 
 
