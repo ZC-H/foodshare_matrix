@@ -20,11 +20,16 @@ class LocationsController < ApplicationController
 
 	def create
     @location = Location.new(location_params)
-    if @location.save
-      flash[:success] = "Place added!"
-      redirect_to '/'
+    if @location.valid?
+    	@locjson = @location.to_json
+    	@event = Event.new
+    	@event.date = params[:date].to_date
+    	render 'events/new'
+      #flash[:success] = "Place added!"
+      #redirect_to '/'
     else
       render 'new'
+      #Change this to it displays any error messages on the page
     end
   end
 

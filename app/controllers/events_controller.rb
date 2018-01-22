@@ -12,20 +12,31 @@ class EventsController < ApplicationController
 		@events = Event.all.order("updated_at DESC")
 	end
 
-	def new
-		@event = Event.new
-	end
+	#def new
+	#	@event = Event.new
+	#end
 
 	def create
 		@event = current_user.events.new(event_params)
-		@event.location_id = 2 #Edit this later
-		if @event.save
+		@event.location_id = 2 #Have to temporarily hardcode in a location ID to check if it's valid before we save the associated location
+		if @event.valid?
+			#@location = 
+			p "Hi"
+			p params
+			@location = Location.create(JSON.parse params[:event][:location])
+			puts "Valid:"
+			p @location.valid?
+			@event.location = nil
+			@event.location_id = @location.id
+			@event.save
 		  redirect_to @event
 		else
+			p "Bye"
 		  render 'new'
 
 		  #Flash errors here
 		end
+		#Also need to add a method to Location to merge identical points		
 	end
 
 	def show
@@ -56,7 +67,6 @@ class EventsController < ApplicationController
 
 	private
 	def event_params
-	  params.require(:event).permit(:name, :description, :expected, :food_amount)
+	  params.require(:event).permit(:name, :description, :expected, :food_amount, :date, :location_id)
 	end
-
 end
