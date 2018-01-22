@@ -28,6 +28,8 @@ class UsersController < Clearance::UsersController
 
 	def show
 		@user = User.find(params[:id])
+		@events = @user.events.order("updated_at DESC")
+
 		
 		render 'users/show'
 	end
@@ -40,8 +42,8 @@ class UsersController < Clearance::UsersController
 
 	def update
 		@user = User.find(params[:id])
-		@user.update_attributes(user_from_params)
-		redirect_to @user
+		@user.update_attributes(user_params)
+		redirect_to root_url
 	end 
 
 	#The below methods were originally written for sinatra, may need some changing

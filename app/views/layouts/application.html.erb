@@ -40,13 +40,30 @@
               <div class="profile-usertitle-name">
                 <%=current_user.name%>
               </div>
+
+              <div class="profile-usertitle-name">
+                <%=current_user.email%>
+              </div>
+
+
+
               <div class="profile-usertitle-job">
                 <%=current_user.role%>
               </div>
           </div>
           <div class="profile-userbuttons">
               <button type="button" class="btn btn-success btn-sm">Follow</button>
-              <button type="button" class="btn btn-danger btn-sm">Edit</button>
+              
+
+             
+
+
+              <%= link_to "Edit", edit_user_path(current_user), class: "btn btn-danger btn-sm" %>
+
+             
+
+
+
           </div>
           <!-- END SIDEBAR BUTTONS -->
 
@@ -67,7 +84,7 @@
                              Events</a>
                              <ul class="dropdown-menu" id="dropdown">
                                  <li><a href="/events">Browse all events</a></li>
-                                 <li><%= link_to "My events", user_events_path(current_user) %>
+                                 <li><%= link_to "My events", user_path(current_user) %>
                                  </li>
                                  <li><a href="/events/new">Create new event</a></li>
                              </ul>
