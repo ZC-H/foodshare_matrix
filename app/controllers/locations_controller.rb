@@ -11,6 +11,9 @@ class LocationsController < ApplicationController
 	def show
 	end
 
+	def index
+	end
+
 	def new
 		@location = Location.new
 	end
@@ -28,6 +31,6 @@ class LocationsController < ApplicationController
   private
 
     def location_params
-      params.require(:location).permit(:name, :address)
+      params.require(:location).permit(:name, :address, :longitude, :latitude)
     end
 end
