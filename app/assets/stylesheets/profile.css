@@ -5,6 +5,11 @@
   margin: 20px 0;
   
 }
+#register-submit-cancel{
+  text-align: center;
+  margin-top: 1vh;
+  text-decoration: none;
+}
 
 /* Profile sidebar */
 .profile-sidebar {
@@ -105,10 +110,3 @@
   min-height: 370px;
 }
 
-/* Footer Content */
-.footer {
-  padding: 10px;
-  background: #dfe3ee;
-  min-width: 100%;
-  text-align: center;
-}
