@@ -78,14 +78,12 @@
 						<div class="col-lg-12">
     						<div class="widget-area no-padding blank">
                                 <div class="status-upload">
-                                    <%= form_tag '' do%>
+                                    <%= form_tag '/blog_post' do%>
+                                     <div class="form-group">
+                                       <label for="exampleInputEmail1">Title</label>
+                                       <input name="title" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Title of your post...">
+                                     </div>
                                         <textarea name='textarea' placeholder="What are you doing right now?" ></textarea>
-                                        <ul>
-                                            <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a></li>
-                                            <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Video"><i class="fa fa-video-camera"></i></a></li>
-                                            <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Sound Record"><i class="fa fa-microphone"></i></a></li>
-                                            <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"><i class="fa fa-picture-o"></i></a></li>
-                                        </ul>
                                         <button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Share</button>
                                     <% end %>
                                 </div><!-- Status Upload  -->
@@ -96,6 +94,8 @@
 				</div>
 
                 <div class="line"></div>
+
+                <% BlogEntry.all.each do |b|%>
                 <div class="row">
                     <div class="col-lg-12">
                         <div id="postlist" id="post-box">
@@ -104,11 +104,12 @@
                                     <div class="text-center">
                                         <div class="row">
                                             <div class="col-sm-9">
-                                                <h3 class="pull-left">Welcome</h3>
+                                                <h3 class="pull-left"><%= b.title %></h3>
                                             </div>
                                             <div class="col-sm-3">
                                                 <h4 class="pull-right">
-                                                <small><em>2014-07-30<br>18:30:00</em></small>
+                                                <small><em>
+                                                    <%= b.created_at %><br></em></small>
                                                 </h4>
                                             </div>
                                         </div>
@@ -116,15 +117,13 @@
                                 </div>
                                 
                             <div class="panel-body">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in... <a href="#">Read more</a>
+                               <%= b.description %></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <% end %>
         </div>
     </div>
 </div>
