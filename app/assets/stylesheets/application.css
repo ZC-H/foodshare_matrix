@@ -80,6 +80,12 @@
 	display: none;
 }
 
+#nav-container{
+	padding-left: 0px;
+}
+#content-background{
+	background-color: green;
+}
 
 @media screen and (max-width: 689px){
 }
