@@ -1,0 +1,40 @@
+
+
+  Index of locations: Currently proof of concept
+
+  	<div class="card"  onunload="GUnload()">
+	  <div class="card-block">
+	    <div id="map" style="height:500px"></div>
+	  </div>
+	</div>
+
+	<script>
+		window.initMap = function() {
+      map = new google.maps.Map(document.getElementById('map'), {
+	      center: {
+	        lat: 3.1390,
+	        lng: 101.6869
+	      },
+	      zoom: 17
+	    });
+	    <% Location.all.each do |loc| %>
+		    var myLatLng = {lat: <%= loc.latitude %>, lng: <%= loc.longitude %>};
+	      var <%= 'marker' + loc.id.to_s %> = new google.maps.Marker({
+	        position: myLatLng,
+	        map: map,
+	        title: '<%= loc.address %>'
+	      });
+	      var <%= 'contentString' + loc.id.to_s %> = '<%= loc.address %>';
+
+	        var <%= 'infowindow' + loc.id.to_s %> = new google.maps.InfoWindow({
+	          content: <%= 'contentString' + loc.id.to_s %>
+	        });
+	        <%= 'marker' + loc.id.to_s %>.addListener('click', function() {
+	            <%= 'infowindow' + loc.id.to_s %>.open(map, <%= 'marker' + loc.id.to_s %>);
+	          });
+	    <% end %>
+    }
+   </script>
+
+   <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["MAP_KEY"] %>&callback=initMap"
+  type="text/javascript"></script>

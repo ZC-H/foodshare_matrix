@@ -14,7 +14,6 @@ class EventsAndLocations < ActiveRecord::Migration[5.1]
   	create_table :locations do |t|
   	  t.string :name
   	  t.string :address
-  	  #Add coordinates later when map APIs are implemented
 
   	  t.timestamps
   	end
