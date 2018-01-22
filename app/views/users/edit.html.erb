@@ -1,0 +1,72 @@
+<div class="container-fluid">
+    <div class="row profile">
+        <!-- PAGE CONTENT -->
+        <div class="col-md-10">
+            <div class="profile-content">
+
+            
+			<div class="well">
+
+				<h1>Edit My Profile</h1>
+
+
+
+			
+			
+
+
+			<%= form_for @user, :method => :put do |f| %>
+		
+			<%= f.label "Name:" %><br>
+			 
+			<%= f.text_field :name, placeholder: "Full Name",id: "username",tabindex: "1" %><br><br>
+		
+		
+		
+			<%= f.label "Email:" %><br>
+			<%= f.email_field :email, placeholder: "Email Address",id: "email",tabindex: "1" %><br>	<br>	
+		
+		
+		
+			<label class="radio-inline">
+			      <input type="radio" name="user[role]" value="community" required>Community
+			    </label>
+			    <label class="radio-inline">
+			      <input type="radio" name="user[role]" value="personal" required>Personal
+			    </label><br><br>
+	
+		
+			<p>
+				
+					 <%= f.submit "Update", :class => 'btn btn-primary btn-lg' %>
+				    <%= link_to "Cancel", root_path, :class => 'btn btn-primary btn-lg' %>
+												</p>
+											
+									<% end %>
+
+
+
+
+
+
+
+
+
+              
+
+            
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="footer">
+        <strong> © 2018 by <a href="https://www.nextacademy.com">Next Academy</a></strong>
+    </div>
+</div>
