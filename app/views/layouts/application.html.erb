@@ -17,9 +17,83 @@
 
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <% if current_user %>
-    <%= button_to 'Sign out', sign_out_path, {:method => :delete, :class => "btn navbar-btn"} %>
-  <% end %>
+  <div class="col-md-2">
+      <div class="profile-sidebar">
+          <!-- SIDEBAR USERPIC -->
+          <div class="profile-userpic">
+              <img src="https://crunchbase-production-res.cloudinary.com/image/upload/c_thumb,h_256,w_256,f_auto,g_faces,z_0.7,q_auto:eco/v1466591235/kqksgid3mofshmeq0yhs.png" class="img-responsive" alt="">
+          </div>
+          <!-- END SIDEBAR USERPIC -->
+          <!-- SIDEBAR USER TITLE -->
+          <div class="profile-usertitle">
+              <div class="profile-usertitle-name">
+  
+              </div>
+              <div class="profile-usertitle-job">
+
+              </div>
+          </div>
+          <!-- END SIDEBAR USER TITLE -->
+          <!-- SIDEBAR BUTTONS -->
+          <% if current_user %>
+          <div class="profile-usertitle">
+              <div class="profile-usertitle-name">
+                <%=current_user.name%>
+              </div>
+              <div class="profile-usertitle-job">
+                <%=current_user.role%>
+              </div>
+          </div>
+          <div class="profile-userbuttons">
+              <button type="button" class="btn btn-success btn-sm">Follow</button>
+              <button type="button" class="btn btn-danger btn-sm">Edit</button>
+          </div>
+          <!-- END SIDEBAR BUTTONS -->
+
+          <!-- SIDEBAR MENU -->
+          
+            <div class="container-fluid">
+              <div class="row profile">
+                <div class="profile-usermenu">
+                    <ul class="nav">
+                        <li class="nav-item active">
+                            <a href="/">
+                            <i class="glyphicon glyphicon-home"></i>
+                            Home </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                             Events</a>
+                             <ul class="dropdown-menu" id="dropdown">
+                                 <li><a href="/events">Browse all events</a></li>
+                                 <li><%= link_to "My events", user_events_path(current_user) %>
+                                 </li>
+                                 <li><a href="/events/new">Create new event</a></li>
+                             </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="glyphicon glyphicon-th-large"></i>
+                             Blogs</a>
+                             <ul class="dropdown-menu" id="dropdown">
+                                 <li><a href="/my_blog">My Blog</a></li>
+                                 <li><a href="/following_blog">Following Blog</a></li>
+                                 <li><a href="#">Browse Blog</a></li>
+                             </ul>
+                        </li>
+                          <li>
+                            <a rel="nofollow" data-method="delete" href="/sign_out"><i class="glyphicon glyphicon-log-out"></i>
+                            Logout</a>
+                          </li>
+                      </ul>
+                </div>
+              </div>
+            </div>
+          <% end %>
+            <!-- END MENU -->
+      </div>
+  </div>
 
 </head>
 <body>

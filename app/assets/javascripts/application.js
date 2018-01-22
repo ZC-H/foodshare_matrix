@@ -31,4 +31,12 @@ $(document).ready(function(){
 		$(this).addClass('active');
 		e.preventDefault();
 	});
+
+// nav bar active
+	// $("a").click(function(e){
+	//    $("li.active").removeClass("active");
+	//    $(e.target).parent('li.nav-item').addClass("active");
+	// });
 });
+
+
