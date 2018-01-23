@@ -12,12 +12,15 @@ class BlogsController < ApplicationController
 	end
 
 	def post
+		
 		@blog = BlogEntry.new
 		title = params["title"]
 		des = params["textarea"]
+		user_id = current_user.id
 
 		@blog.title = title
 		@blog.description = des
+		@blog.user_id = user_id
 		if @blog.save 
 			render 'blogs/my_blog'
 		else
