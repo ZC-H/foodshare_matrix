@@ -1,155 +1,176 @@
-	<div class="card" onload="initialize()" onunload="GUnload()">
-	  <div class="card-block">
-	    <div id="map" style="height:500px"></div>
-	  </div>
-	</div>
+<div class="card" onload="initialize()" onunload="GUnload()">
+  <div class="card-block">
+    <div id="map" style="height:500px"></div>
+  </div>
+</div>
+<div class="container-fluid" id="background-all">
+    <div class="row profile" id="calender-page">
+        <!-- PAGE CONTENT -->
+        <div class="col-md-10" id="content-background">
+            <div class="profile-content">
+				<div class="event-form">
+					<div class="row" id="event-form-row">
+						<div class="col-lg-1"></div>
+						<div class="col-lg-10">
+    						<div class="widget-area no-padding blank" id="create-event-card">
+    							<h3>Create a Event</h3>
+                                <div class="status-upload">
+                                	
+                                	 <%= form_for @location do |f| %>
+                                	 	<h5>
+                                	 		Click on the map or search for a location
+                                	 		<span class="asteriskField">
+                                	 			*
+                                	 		</span>
+                                	 	</h5>
+                                		<div class="form-group">
+                                			<%= f.text_field :address, class: "form-control", placeholder: "Search for an address...",id: "location_address",tabindex: "1" %>
+                                			<!-- <div class="col-sm-4"> -->
+                                			  <a href="#" id="find-from-address" class="btn btn-primary btn-sm">click to search by address</a>
+                                			<!-- </div> -->
 
+                                		</div>
+                                		
+                                		<%= f.hidden_field :latitude, class: "form-control" %>
+                                		<%= f.hidden_field :longitude, class: "form-control" %>
 
-	<%= form_for @location do |f| %>
-	  <fieldset class="form-group">
-	  	<h2>Click on the map to choose a location!</h2>
-	    <%= f.label :address, 'Address' %>
-	    <%= f.text_field :address, class: "form-control" %>
-	  
-
-		<div class="col-sm-4">
-      <a href="#" id="find-from-address" class="btn btn-info btn-sm">Or find from an address</a>
+                                		<div class="form-group">
+	                                		<div class="bootstrap-iso">
+	                                		   <div class="container-fluid" id="background-all">
+	                                		        <div class="row" id="calender">
+	                                		            <div class="col-md-6 col-sm-6 col-xs-12" id="calender-wide"> 
+	                                		            	<h5>Choose a date 
+	                                		            		<span class="asteriskField">
+		                                		            	  *
+		                                		            	</span>
+	                                		            	</h5>
+	                                		            	
+	                                		                <div class="form-group ">
+	                                		                    <div class="col-sm-10" id="calender-wide">
+	                                		                        <div class="input-group">
+	                                		                            <div class="input-group-addon">
+	                                		                                <i class="fa fa-calendar">
+	                                		                                </i>
+	                                		                            </div>
+	                                		                            <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text" />
+	                                		                        </div>
+	                                		                    </div>
+	                                		                </div>
+	                                		            </div>
+	                                		        </div>
+	                                		   </div>
+	                                		</div>
+                                		</div>
+                                		<div class="form-group">
+                                			<div class="row">
+                                				<div class="col-sm-6 col-sm-offset-3">
+                                					<%= f.submit 'Next', {class: 'form-control btn-success btn-register',name: 'register-submit', id:'register-submit next', tabindex: '4'} %>
+                                				</div>
+                                			</div>
+                                		</div>
+                                	<% end %>
+                                </div><!-- Status Upload  -->
+                            </div><!-- Widget Area -->
+                        </div>
+					</div>
+				</div>
+			</div>
+        </div>
     </div>
-
-    </fieldset>
-
-		    <%= f.hidden_field :latitude, class: "form-control" %>
-		    <%= f.hidden_field :longitude, class: "form-control" %>
-
-				  <div class="bootstrap-iso">
-				   <div class="container-fluid">
-				    <div class="row">
-				     <div class="col-md-6 col-sm-6 col-xs-12">
-				      
-				       <div class="form-group ">
-				        <label class="control-label col-sm-2 requiredField" for="date">
-				         Date
-				         <span class="asteriskField">
-				          *
-				         </span>
-				        </label>
-				        <div class="col-sm-10">
-				         <div class="input-group">
-				          <div class="input-group-addon">
-				           <i class="fa fa-calendar">
-				           </i>
-				          </div>
-				          <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>
-				         </div>
-				        </div>
-				       </div>
-
-				     </div>
-				    </div>
-
-				   </div>
-			  <%= f.submit 'Add!', class: 'btn btn-primary' %>
-		<% end %>
+</div>
 
 
-		</div>
+    <script>
+    var address_field, lat_field, lng_field, markersArray, placeMarkerAndPanTo, updateFields;
 
-	 </div>
+    markersArray = [];
 
+    lat_field = $('#location_latitude');
 
-	
+    lng_field = $('#location_longitude');
 
+    address_field = $('#location_address');
 
+    window.initMap = function() {
+      var codeAddress, gcoder, map;
+      if ($('#map').size() > 0) {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {
+            lat: 3.1390,
+            lng: 101.6869
+          },
+          zoom: 17
+        });
+        gcoder = new google.maps.Geocoder;
+        map.addListener('click', function(e) {
+          placeMarkerAndPanTo(e.latLng, map);
+          return updateFields(e.latLng);
+        });
+        $('#find-on-map').click(function(e) {
+          e.preventDefault();
+          return placeMarkerAndPanTo({
+            lat: parseInt(lat_field.val(), 10),
+            lng: parseInt(lng_field.val(), 10)
+          }, map);
+        });
+        $('#find-from-address').click(function(e) {
+          e.preventDefault();
+          return codeAddress();
+        });
+        $('#location_address').focusout(
+            function() {
+          return codeAddress();
+            })
+        return codeAddress = function() {
+          var address;
+          address = $('#location_address').val();
+          gcoder.geocode({
+            'address': address
+          }, function(results, status) {
+            var marker;
+            if (status === 'OK') {
+              while (markersArray.length) {
+                markersArray.pop().setMap(null);
+              }
+              marker = new google.maps.Marker({
+                position: results[0].geometry.location,
+                map: map
+              });
+              map.panTo(results[0].geometry.location);
+              markersArray.push(marker);
+              lat_field.val(null);
+              lng_field.val(null);
+            } else {
+              alert('Geocode was not successful for the following reason: ' + status);
+            }
+          });
+        };
+      }
+    };
 
+    placeMarkerAndPanTo = function(latLng, map) {
+      var marker;
+      while (markersArray.length) {
+        markersArray.pop().setMap(null);
+      }
+      marker = new google.maps.Marker({
+        position: latLng,
+        map: map
+      });
+      map.panTo(latLng);
+      return markersArray.push(marker);
+    };
 
-	<script>
-	var address_field, lat_field, lng_field, markersArray, placeMarkerAndPanTo, updateFields;
-
-	markersArray = [];
-
-	lat_field = $('#location_latitude');
-
-	lng_field = $('#location_longitude');
-
-	address_field = $('#location_address');
-
-	window.initMap = function() {
-	  var codeAddress, gcoder, map;
-	  if ($('#map').size() > 0) {
-	    map = new google.maps.Map(document.getElementById('map'), {
-	      center: {
-	        lat: 3.1390,
-	        lng: 101.6869
-	      },
-	      zoom: 17
-	    });
-	    gcoder = new google.maps.Geocoder;
-	    map.addListener('click', function(e) {
-	      placeMarkerAndPanTo(e.latLng, map);
-	      return updateFields(e.latLng);
-	    });
-	    $('#find-on-map').click(function(e) {
-	      e.preventDefault();
-	      return placeMarkerAndPanTo({
-	        lat: parseInt(lat_field.val(), 10),
-	        lng: parseInt(lng_field.val(), 10)
-	      }, map);
-	    });
-	    $('#find-from-address').click(function(e) {
-	      e.preventDefault();
-	      return codeAddress();
-	    });
-	    $('#location_address').focusout(
-	    	function() {
-	      return codeAddress();
-	    	})
-	    return codeAddress = function() {
-	      var address;
-	      address = $('#location_address').val();
-	      gcoder.geocode({
-	        'address': address
-	      }, function(results, status) {
-	        var marker;
-	        if (status === 'OK') {
-	          while (markersArray.length) {
-	            markersArray.pop().setMap(null);
-	          }
-	          marker = new google.maps.Marker({
-	            position: results[0].geometry.location,
-	            map: map
-	          });
-	          map.panTo(results[0].geometry.location);
-	          markersArray.push(marker);
-	          lat_field.val(null);
-	          lng_field.val(null);
-	        } else {
-	          alert('Geocode was not successful for the following reason: ' + status);
-	        }
-	      });
-	    };
-	  }
-	};
-
-	placeMarkerAndPanTo = function(latLng, map) {
-	  var marker;
-	  while (markersArray.length) {
-	    markersArray.pop().setMap(null);
-	  }
-	  marker = new google.maps.Marker({
-	    position: latLng,
-	    map: map
-	  });
-	  map.panTo(latLng);
-	  return markersArray.push(marker);
-	};
-
-	updateFields = function(latLng) {
-	  lat_field.val(latLng.lat());
-	  lng_field.val(latLng.lng());
-	  return address_field.val(null);
-	};
+    updateFields = function(latLng) {
+      lat_field.val(latLng.lat());
+      lng_field.val(latLng.lng());
+      return address_field.val(null);
+    };
 </script>
 
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["MAP_KEY"] %>&callback=initMap"
   type="text/javascript"></script>
+
+
+
