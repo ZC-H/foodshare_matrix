@@ -20,18 +20,12 @@ class EventsController < ApplicationController
 		@event = current_user.events.new(event_params)
 		@event.location_id = 2 #Have to temporarily hardcode in a location ID to check if it's valid before we save the associated location
 		if @event.valid?
-			#@location = 
-			p "Hi"
-			p params
 			@location = Location.create(JSON.parse params[:event][:location])
-			puts "Valid:"
-			p @location.valid?
 			@event.location = nil
 			@event.location_id = @location.id
 			@event.save
 		  redirect_to @event
 		else
-			p "Bye"
 		  render 'new'
 
 		  #Flash errors here
