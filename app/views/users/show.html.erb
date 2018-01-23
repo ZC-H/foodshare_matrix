@@ -17,6 +17,13 @@
 
         <!-- PAGE CONTENT -->
             <div class="col-md-8" id="each-blog-follow">
+                <h1><u>My Profile</u></h1>
+                <p>Name: <%= @user.name %></p>
+                <p>Email: <%= @user.email %></p>
+                <p>Role: <%= @user.role %></p>
+
+                <div class="line"></div>
+                
                 <h1>My Events</h1>
                 <% @events.each do |event| %>
                     <div class="row">
