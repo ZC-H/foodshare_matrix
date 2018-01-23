@@ -2,6 +2,13 @@
 	color: black;
 }
 
+#profile-details>p{
+	color: black;
+}
+#profile-picture{
+	height: 200px;
+	    width: 200px;
+}
 #blog-post{
 	background-color: white;
 	margin:5vh;
