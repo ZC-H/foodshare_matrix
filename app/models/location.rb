@@ -8,7 +8,6 @@ class Location < ApplicationRecord
 
 
 	def score
-		#Enhance this method later
 		locscore = self.events.length
 		self.nearbys(1).each do |loc|
 			locscore += loc.events.length
@@ -23,6 +22,16 @@ class Location < ApplicationRecord
 		return false
 	end
 
-
+	def events_within(distance,days=0,start_date=Date.today)
+		evs = []
+		evs += self.events
+		near = self.nearbys(distance)
+		near.each { |nearloc| evs += nearloc.events } #make array of all nearby events
+		evs_within = []
+		evs.each do |ev|
+			evs_within << ev if (ev.date >= start_date && ev.date <= start_date + days )
+		end
+		evs_within
+	end
 
 end
