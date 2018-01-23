@@ -12,4 +12,10 @@ class Location < ApplicationRecord
 		self.nearbys(1).length
 	end
 
+	def check_duplicate
+		Location.all.each do |loc|
+			return loc.id if ( self.longitude == loc.longitude && self.latitude == loc.latitude )
+		end
+		return false
+	end
 end
