@@ -1,3 +1,6 @@
+#create-event-card{
+
+}
 #event-des{
 	height: 10vh;
 }
@@ -7,5 +10,20 @@
 }
 
 #num-people{
+	width: 10vh;
+}
+#calender{
+	background-color: white;
+	padding-top: 1vh;
+}
+#calender-page{
+	height: 30vh;
+}
+#calender-wide{
+	padding-left: 0vh;
+	padding-bottom: 1vh;
+}
+
+#next{
 	width: 10vh;
 }
