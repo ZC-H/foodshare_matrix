@@ -22,14 +22,14 @@
 
                         	<table class="table-fill">
                             	<thead>
-	                            	<tr>
+	                            	<tr id="table-row">
 	                            	<th class="text-left" id="header-column">Top Location</th>
 	                            	</tr>
                             	</thead>
                             	<% @locations.each do |loc| %>
                             	<tbody class="table-hover">
-	                            	<tr>
-		                            	<td class="text-left"><a href="#" id="<%= 'locname' + loc.id.to_s %>"><%= loc.name ? loc.name : "Unnamed Location" %> </a></td>
+	                            	<tr id="table-row">
+		                            	<td class="text-left" id="table-td"><a href="#" id="<%= 'locname' + loc.id.to_s %>"><%= loc.name ? loc.name : "Unnamed Location" %> </a></td>
 	                            	</tr>
                             	</tbody>
                     			<script>

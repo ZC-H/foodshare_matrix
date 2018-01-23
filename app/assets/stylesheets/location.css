@@ -100,7 +100,7 @@ div.table-title {
   border-right: 0px;
 }
 
-th.text-left {
+#header-column{
   text-align: center;
   padding: 2vh;
 }
@@ -113,7 +113,7 @@ th.text-right {
   text-align: right;
 }
 
-td.text-left {
+#table-td {
   text-align: center;
   padding: 1vh;
   border-bottom: solid;
