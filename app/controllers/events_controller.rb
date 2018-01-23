@@ -20,9 +20,15 @@ class EventsController < ApplicationController
 		@event = current_user.events.new(event_params)
 		@event.location_id = Location.first.id #Have to temporarily hardcode in a location ID to check if it's valid before we save the associated location
 		if @event.valid?
-			@location = Location.create(JSON.parse params[:event][:location])
+			@location = Location.new(JSON.parse params[:event][:location])
+			dupl = @location.check_duplicate #dupl returns an integer if location exists
 			@event.location = nil
-			@event.location_id = @location.id
+			if dupl #if location already exists
+				@event.location_id = dupl
+			else
+				@location.save
+				@event.location_id = @location.id
+			end
 			@event.save
 		  redirect_to @event
 		else

@@ -9,13 +9,20 @@ class Location < ApplicationRecord
 
 	def score
 		#Enhance this method later
-		self.nearbys(1).length
+		locscore = self.events.length
+		self.nearbys(1).each do |loc|
+			locscore += loc.events.length
+		end
+		locscore
 	end
 
 	def check_duplicate
 		Location.all.each do |loc|
-			return loc.id if ( self.longitude == loc.longitude && self.latitude == loc.latitude )
+			return loc.id if ( self.longitude == loc.longitude && self.latitude == loc.latitude && self.id != loc.id)
 		end
 		return false
 	end
+
+
+
 end
