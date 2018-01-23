@@ -55,6 +55,9 @@ class EventsController < ApplicationController
 	end
 
 
+	def search_page
+		render 'events/search'
+	end
 
 
 
