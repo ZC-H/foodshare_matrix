@@ -1,76 +1,17 @@
-
-
-
-
-
-
-<div class="container-fluid">
+<div class="container-fluid" id="background-all">
     <div class="row profile">
-
-
-
         <!-- PAGE CONTENT -->
         <div class="col-md-10">
             <div class="profile-content">
-
-            
-
-			
-				<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@location.latitude},#{@location.longitude}&markers=#{@location.latitude},#{@location.longitude}&zoom=17&size=640x400&key=#{ENV['MAPS_KEY']}",
+              <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@location.latitude},#{@location.longitude}&markers=#{@location.latitude},#{@location.longitude}&zoom=17&size=640x400&key=#{ENV['MAPS_KEY']}",
               class: 'img-fluid img-rounded', alt: "Event Location Preview" %>
-
-			
-
-
-
-
-
-
-
-			<div id="postlist" id="post-box">
-                        <div class="panel" id="post-border">
-                            <div class="panel-heading">
-                                <div class="text-center">
-                                    <div class="row">
-                                        <div class="col-sm-9">
-                                                <h3 class="pull-left">Create new event</h3>
-                                        </div>
-                                        <div class="col-sm-3">
-                                                <h4 class="pull-right">
-                                                <small><em><br></em></small>
-                                                </h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                                
-	                        <div class="panel-body">
-	                             	<%= form_for @event do |f| %>
-
-										<%= render "events/form", f: f %><br>
-                                        <%= f.hidden_field "location", :value => @locjson %>
-										  <p>
-										    <%= f.submit "Create Event", :class => 'btn btn-primary btn-lg' %>
-										     <%= link_to "Cancel", events_path, :class => 'btn btn-primary btn-lg' %>
-										  </p>
-									<% end %>
-	                        </div>
-                        </div>
-                    </div>        
-
-            
-
+                <div id="postlist" id="post-box">
+                    <%= form_for @event do |f| %>
+                        <%= render "form", f: f %><br>
+                    <% end %>
+                </div>
             </div>
         </div>
-
-
-
     </div>
 </div>
 
-
-<div class="container-fluid">
-    <div class="footer">
-        <strong> © 2018 by <a href="https://www.nextacademy.com">Next Academy</a></strong>
-    </div>
-</div>
