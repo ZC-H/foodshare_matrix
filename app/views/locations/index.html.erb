@@ -1,78 +1,80 @@
 
 
-  Index of locations: Currently proof of concept
+<div class="card"  onunload="GUnload()">
+  <div class="card-block" id="map-container">
+  	<div id="map" style="height:500px"></div>
+  </div>
+</div>
 
-  <div class="card"  onunload="GUnload()">
-	  <div class="card-block">
-	    <div id="map" style="height:500px"></div>
-	  </div>
-	</div>
-        <div class="col-md-10">
+
+
+<div class="container-fluid" id="background-all">
+    <div class="row profile">
+        <!-- PAGE CONTENT -->
+        <div class="col-md-10" id="content-background">
             <div class="profile-content">
+                <div class="event-form">
+                    <div class="row" id="event-form-row">
+                        <div class="col-lg-12">
+                        	<div class="table-title">
+                        		<!-- <h3>Locations</h3> -->
+                        	</div>
 
-	<% @locations.each do |loc| %>
-		 <div id="postlist" id="post-box">
-		    <div class="panel" id="post-border">
-		        <div class="panel-heading">
-		            <div class="text-center">
-		                <div class="row">
-		                    <div class="col-sm-9">
-		                        <h3 class="pull-left" ><a href="#" id="<%= 'locname' + loc.id.to_s %>"><%= loc.name ? loc.name : "Unnamed Location" %> </a></h3>
-		                    </div>
-		                    <div class="col-sm-3">
-		                        <h4 class="pull-right">
-		                        <small><em>Text can go here</em></small>
-		                        </h4>
-		                    </div>
-		                </div>
-		            </div>
-		        </div>
-		        
-		        <div class="panel-body">
-		            <p><%= loc.address %></p>
-		        </div>
-		    </div>
-		</div>
-
-		<div class="line"></div>
-
-		<script>
-			$('#<%= 'locname' + loc.id.to_s %>').click(function(e) {
-	      e.preventDefault();
-	      map.panTo({lat: <%=loc.latitude %>,lng: <%=loc.longitude %>});
-	    });
-		</script>
-
-	<% end %>
+                        	<table class="table-fill">
+                            	<thead>
+	                            	<tr>
+	                            	<th class="text-left">Top Location</th>
+	                            	</tr>
+                            	</thead>
+                            	<% @locations.each do |loc| %>
+                            	<tbody class="table-hover">
+	                            	<tr>
+		                            	<td class="text-left"><a href="#" id="<%= 'locname' + loc.id.to_s %>"><%= loc.name ? loc.name : "Unnamed Location" %> </a></td>
+	                            	</tr>
+                            	</tbody>
+                    			<script>
+                    				$('#<%= 'locname' + loc.id.to_s %>').click(function(e) {
+                    		      e.preventDefault();
+                    		      map.panTo({lat: <%=loc.latitude %>,lng: <%=loc.longitude %>});
+                    		    });
+                    			</script>
+                    	        <% end %>
+                        	</table> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-</div>
-	<script>
-		window.initMap = function() {
-      map = new google.maps.Map(document.getElementById('map'), {
-	      center: {
-	        lat: 3.1390,
-	        lng: 101.6869
-	      },
-	      zoom: 17
-	    });
-	    <% Location.all.each do |loc| %>
-		    var myLatLng = {lat: <%= loc.latitude %>, lng: <%= loc.longitude %>};
-	      var <%= 'marker' + loc.id.to_s %> = new google.maps.Marker({
-	        position: myLatLng,
-	        map: map,
-	        title: '<%= loc.address %>'
-	      });
-	      var <%= 'contentString' + loc.id.to_s %> = '<%= loc.address %>';
 
-	        var <%= 'infowindow' + loc.id.to_s %> = new google.maps.InfoWindow({
-	          content: <%= 'contentString' + loc.id.to_s %>
-	        });
-	        <%= 'marker' + loc.id.to_s %>.addListener('click', function() {
-	            <%= 'infowindow' + loc.id.to_s %>.open(map, <%= 'marker' + loc.id.to_s %>);
-	          });
-	    <% end %>
-    }
-   </script>
+<script>
+	window.initMap = function() {
+  map = new google.maps.Map(document.getElementById('map'), {
+      center: {
+        lat: 3.1390,
+        lng: 101.6869
+      },
+      zoom: 17
+    });
+    <% Location.all.each do |loc| %>
+	    var myLatLng = {lat: <%= loc.latitude %>, lng: <%= loc.longitude %>};
+      var <%= 'marker' + loc.id.to_s %> = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: '<%= loc.address %>'
+      });
+      var <%= 'contentString' + loc.id.to_s %> = '<%= loc.address %>';
 
-   <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["MAP_KEY"] %>&callback=initMap"
-  type="text/javascript"></script>
+        var <%= 'infowindow' + loc.id.to_s %> = new google.maps.InfoWindow({
+          content: <%= 'contentString' + loc.id.to_s %>
+        });
+        <%= 'marker' + loc.id.to_s %>.addListener('click', function() {
+            <%= 'infowindow' + loc.id.to_s %>.open(map, <%= 'marker' + loc.id.to_s %>);
+          });
+    <% end %>
+}
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["MAP_KEY"] %>&callback=initMap"
+type="text/javascript"></script>
