@@ -18,7 +18,7 @@ class EventsController < ApplicationController
 
 	def create
 		@event = current_user.events.new(event_params)
-		@event.location_id = 2 #Have to temporarily hardcode in a location ID to check if it's valid before we save the associated location
+		@event.location_id = Location.first.id #Have to temporarily hardcode in a location ID to check if it's valid before we save the associated location
 		if @event.valid?
 			@location = Location.create(JSON.parse params[:event][:location])
 			@event.location = nil
@@ -27,7 +27,6 @@ class EventsController < ApplicationController
 		  redirect_to @event
 		else
 		  render 'new'
-
 		  #Flash errors here
 		end
 		#Also need to add a method to Location to merge identical points		

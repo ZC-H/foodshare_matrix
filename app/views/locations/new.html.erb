@@ -7,37 +7,19 @@
 
 	<%= form_for @location do |f| %>
 	  <fieldset class="form-group">
+	  	<h2>Click on the map to choose a location!</h2>
 	    <%= f.label :address, 'Address' %>
 	    <%= f.text_field :address, class: "form-control" %>
 	  
 
 		<div class="col-sm-4">
-      <a href="#" id="find-from-address" class="btn btn-info btn-sm">Find from address</a>
+      <a href="#" id="find-from-address" class="btn btn-info btn-sm">Or find from an address</a>
     </div>
 
     </fieldset>
 
-		<div class="form-group row">
-		  <div class="col-sm-1">
-		    <%= f.label :latitude %>
-		  </div>
-
-		  <div class="col-sm-3">
-		    <%= f.text_field :latitude, class: "form-control" %>
-		  </div>
-
-		  <div class="col-sm-1">
-		    <%= f.label :longitude %>
-		  </div>
-
-		  <div class="col-sm-3">
-		    <%= f.text_field :longitude, class: "form-control" %>
-		  </div>
-		
-
-			<div class="col-sm-4">
-	      <a href="#" id="find-on-map" class="btn btn-info btn-sm">Find from coordinates</a>
-	    </div>
+		    <%= f.hidden_field :latitude, class: "form-control" %>
+		    <%= f.hidden_field :longitude, class: "form-control" %>
 
 				  <div class="bootstrap-iso">
 				   <div class="container-fluid">
@@ -117,6 +99,10 @@
 	      e.preventDefault();
 	      return codeAddress();
 	    });
+	    $('#location_address').focusout(
+	    	function() {
+	      return codeAddress();
+	    	})
 	    return codeAddress = function() {
 	      var address;
 	      address = $('#location_address').val();
