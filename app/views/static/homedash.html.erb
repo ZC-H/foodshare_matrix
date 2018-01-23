@@ -11,6 +11,8 @@
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=visualization">
 
+
+
       var map, heatmap;
 
       function initMap() {
@@ -19,6 +21,28 @@
           center: {lat: 3.1390, lng: 101.6869},
           mapTypeId: 'roadmap'
         });
+
+
+         <% Location.all.each do |loc| %>
+              var myLatLng = {lat: <%= loc.latitude %>, lng: <%= loc.longitude %>};
+              var <%= 'marker' + loc.id.to_s %> = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: '<%= loc.address %>'
+              });
+              var <%= 'contentString' + loc.id.to_s %> = '<%= loc.address %>';
+
+                var <%= 'infowindow' + loc.id.to_s %> = new google.maps.InfoWindow({
+                  content: <%= 'contentString' + loc.id.to_s %>
+                });
+                <%= 'marker' + loc.id.to_s %>.addListener('click', function() {
+                    <%= 'infowindow' + loc.id.to_s %>.open(map, <%= 'marker' + loc.id.to_s %>);
+                  });
+            <% end %>
+
+
+
+
 
         heatmap = new google.maps.visualization.HeatmapLayer({
           data: getPoints(),
