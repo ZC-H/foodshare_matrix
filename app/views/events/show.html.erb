@@ -45,7 +45,7 @@
 									<p>End time: <%= @event.end_time %></p>
 									
 									<p>Posted by: <%= @event.user.email %></p>
-
+                                    <p><%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@event.location.latitude},#{@event.location.longitude}&markers=#{@event.location.latitude},#{@event.location.longitude}&zoom=17&size=940x400&key=#{ENV['MAPS_KEY']}", class: 'img-fluid img-rounded', alt: "Event Location Preview" %></p>
 									<% if current_user.id == @event.user.id %>
 
 									<p><%= link_to "Edit this event", edit_event_path(@event), :class => 'btn btn-primary btn-lg' %>
