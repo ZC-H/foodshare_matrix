@@ -26,8 +26,9 @@
                                       		<label for="form-control">Number of serving for food?</label>
                                            <%= f.number_field :food_amount, class: "form-control", placeholder: "10",id: "num-people",tabindex: "2" %>
                                       </div>
-                                        <div class="container-fluid">
+                                      <div class="container-fluid">
                                           <div class="row">
+
                                            <div class="col-md-6 col-sm-6 col-xs-12" id="calender-wide">
 
                                              <div class="form-group ">
@@ -44,11 +45,10 @@
                                                 </div>
                                                 <input class="form-control" id="date" name="event[date]" placeholder="MM/DD/YYYY" type="text" value="<%= @event.date.strftime('%d/%m/%y') %>" />
                                                </div>
+
                                               </div>
-                                             </div>
-                                           </div>
                                           </div>
-                                        </div>
+                                      </div>
                                         <%= f.hidden_field "location", :value => @locjson %>
                                       		  <div class="bootstrap-iso">
                                         <div class="form-group">

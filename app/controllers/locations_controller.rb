@@ -12,6 +12,7 @@ class LocationsController < ApplicationController
 	end
 
 	def index
+    @locations = Location.all.sort_by(&:score)
 	end
 
 	def new
