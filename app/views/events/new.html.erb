@@ -2,6 +2,7 @@
     <div class="row profile">
         <!-- PAGE CONTENT -->
         <div class="col-md-10">
+            <h1>Create a New Event</h1>
             <div class="profile-content">
               <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@location.latitude},#{@location.longitude}&markers=#{@location.latitude},#{@location.longitude}&zoom=17&size=940x400&key=#{ENV['MAPS_KEY']}",
               class: 'img-fluid img-rounded', alt: "Event Location Preview" %>
