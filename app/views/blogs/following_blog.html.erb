@@ -1,49 +1,40 @@
 
 
 
-<div class="container-fluid">
+<div class="container-fluid" id="background-all">
     <div class="row profile">
 
         <!-- PAGE CONTENT -->
-        <div class="col-md-10">
-            <h3>Following Blog</h3>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div id="postlist" id="post-box">
-                            <div class="panel" id="post-border">
-                                <div class="panel-heading">
-                                    <div class="text-center">
-                                        <div class="row">
-                                            <div class="col-sm-9">
-                                                <h3 class="pull-left">Welcome</h3>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <h4 class="pull-right">
-                                                <small><em>2014-07-30<br>18:30:00</em></small>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
+            <div class="col-md-8" id="each-blog-follow">
+                <h1>Followers</h1>
+                <% BlogEntry.all.each do |b|%>
+                    <div class="row">
+                        <div class="col-lg-12 " id="blog-post">
+                            <div class="media">
+                                <a class="pull-left" href="#">
+                                    <img src="https://crunchbase-production-res.cloudinary.com/image/upload/c_thumb,h_256,w_256,f_auto,g_faces,z_0.7,q_auto:eco/v1466591235/kqksgid3mofshmeq0yhs.png" class="img-responsive" alt="" style="width: 100px;height:100px;">
+                                </a>
+                                <div class="media-body" id="blog-content">
+                                    <h4 class="media-heading">
+                                        <%=current_user.name%>
+                                    </h4>
+                                    <small><%=b.created_at%></small>
+                                    <h4>Subject: <%=b.title%></h4>
+                                    <hr>
+                                    <p id="description"><%=b.description%></p>
+
                                 </div>
-                                
-                            <div class="panel-body">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in... <a href="#">Read more</a>
                             </div>
+
                         </div>
+
+                        
+
                     </div>
-                </div>
+                <% end %>
             </div>
         </div>
     </div>
 </div>
 
-
-<div class="container-fluid">
-    <div class="footer">
-        <strong> © 2018 by <a href="https://www.nextacademy.com">Next Academy</a></strong>
-    </div>
-</div>
 

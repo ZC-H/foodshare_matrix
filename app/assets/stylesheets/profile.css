@@ -3,12 +3,19 @@
 /* Profile container */
 .profile {
   margin: 20px 0;
+  
+}
+#register-submit-cancel{
+  text-align: center;
+  margin-top: 1vh;
+  text-decoration: none;
 }
 
 /* Profile sidebar */
 .profile-sidebar {
   padding: 20px 0 10px 0;
-  background: #dfe3ee;
+  background: #233237;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 1);
   height: 100vh;
 }
 
@@ -28,7 +35,7 @@
 }
 
 .profile-usertitle-name {
-  color: #000000;
+  color: #fff;
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 7px;
@@ -72,7 +79,7 @@
 }
 
 .profile-usermenu ul li a {
-  color: #3e3e3e;
+  color: white;
   font-size: 14px;
   font-weight: 400;
 }
@@ -99,15 +106,7 @@
 }
 
 /* Profile Content */
-.profile-content {
-  background: #fff;
+
   min-height: 370px;
 }
 
-/* Footer Content */
-.footer {
-  padding: 10px;
-  background: #dfe3ee;
-  min-width: 100%;
-  text-align: center;
-}
