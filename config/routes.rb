@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   get "/my_blog" => "blogs#myBlog"
   get "/following_blog" => "blogs#following"
   get "/browse_blog" => "blogs#browse"
+  get "/event_location" => "locations#new"
 
   post "/blog_post" => "blogs#post"
 end

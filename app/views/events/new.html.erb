@@ -3,6 +3,8 @@
         <!-- PAGE CONTENT -->
         <div class="col-md-10">
             <div class="profile-content">
+              <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@location.latitude},#{@location.longitude}&markers=#{@location.latitude},#{@location.longitude}&zoom=17&size=640x400&key=#{ENV['MAPS_KEY']}",
+              class: 'img-fluid img-rounded', alt: "Event Location Preview" %>
                 <div id="postlist" id="post-box">
                     <%= form_for @event do |f| %>
                         <%= render "form", f: f %><br>
