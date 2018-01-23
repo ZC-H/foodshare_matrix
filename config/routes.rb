@@ -35,4 +35,6 @@ Rails.application.routes.draw do
   get "/event_location" => "locations#new"
 
   post "/blog_post" => "blogs#post"
+
+  get "/search" => "events#search_page"
 end
