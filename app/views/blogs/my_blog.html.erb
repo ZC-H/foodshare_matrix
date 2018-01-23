@@ -32,7 +32,9 @@
 			</div>
             
             <div class="col-md-10" id="each-blog">
+                
                 <% BlogEntry.all.each do |b|%>
+                    <% if current_user.id == b.user_id %>
                     <div class="row">
                         <div class="col-lg-12 " id="blog-post">
                             <div class="media">
@@ -41,7 +43,7 @@
                                 </a>
                                 <div class="media-body" id="blog-content">
                                     <h4 class="media-heading">
-                                        <%=current_user.name%>
+                                        <%= current_user.name%>
                                     </h4>
                                     <small><%=b.created_at%></small>
                                     <h4>Subject: <%=b.title%></h4>
@@ -56,6 +58,7 @@
                         
 
                     </div>
+                    <% end %>
                 <% end %>
             </div>
         </div>

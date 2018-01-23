@@ -8,7 +8,10 @@
             <div class="col-md-8" id="each-blog-follow">
                 <h1>Followers</h1>
                 <% BlogEntry.all.each do |b|%>
-                    <div class="row">
+
+                <% if current_user.id != b.user_id %>
+               
+                <div class="row">
                         <div class="col-lg-12 " id="blog-post">
                             <div class="media">
                                 <a class="pull-left" href="#">
@@ -16,10 +19,11 @@
                                 </a>
                                 <div class="media-body" id="blog-content">
                                     <h4 class="media-heading">
-                                        <%=current_user.name%>
+                                        <%= User.find_by(id: b.user_id).name%>
                                     </h4>
                                     <small><%=b.created_at%></small>
                                     <h4>Subject: <%=b.title%></h4>
+                                    <button type="button" class="btn btn-danger btn-sm">Unfollow</button>
                                     <hr>
                                     <p id="description"><%=b.description%></p>
 
@@ -31,6 +35,7 @@
                         
 
                     </div>
+                     <% end %>
                 <% end %>
             </div>
         </div>
