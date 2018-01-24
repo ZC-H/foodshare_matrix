@@ -25,6 +25,7 @@ class LocationsController < ApplicationController
     	@locjson = @location.to_json
     	@event = Event.new
     	@event.date = params[:date].to_date
+      @nearbyevents = @location.events_within(1)
     	render 'events/new'
       #flash[:success] = "Place added!"
       #redirect_to '/'
