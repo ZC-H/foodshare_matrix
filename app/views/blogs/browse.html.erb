@@ -21,7 +21,11 @@
                                     </h4>
                                     <small><%=b.created_at%></small>
                                     <h4>Subject: <%=b.title%></h4>
-                                    <button type="button" class="btn btn-success btn-sm">Follow</button>
+                                    <% if rand(2) == 1 %>
+                                        <button type="button" class="btn btn-success btn-sm">Follow</button>
+                                    <% else %>
+                                        <button type="button" class="btn btn-danger btn-sm">Unfollow</button>
+                                    <% end %>
                                     <hr>
                                     <p id="description"><%=b.description%></p>
 
