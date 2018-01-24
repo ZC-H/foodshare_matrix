@@ -37,4 +37,7 @@ Rails.application.routes.draw do
   post "/blog_post" => "blogs#post"
 
   get "/search" => "events#search_page"
+  get "/v2" => "static#v2"
+
+
 end
