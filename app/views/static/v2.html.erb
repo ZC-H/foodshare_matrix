@@ -1,0 +1,116 @@
+<div id="floating-panel">
+      <button onclick="toggleHeatmap()">Toggle Heatmap</button>
+      <button onclick="changeGradient()">Change gradient</button>
+      <button onclick="changeRadius()">Change radius</button>
+      <button onclick="changeOpacity()">Change opacity</button>
+    </div>
+    <div id="map"></div>
+    <script>
+
+      // This example requires the Visualization library. Include the libraries=visualization
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=visualization">
+
+
+
+      var map, heatmap;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: {lat: 3.1390, lng: 101.6869},
+          mapTypeId: 'roadmap'
+        });
+
+
+         <% Location.all.each do |loc| %>
+              var myLatLng = {lat: <%= loc.latitude %>, lng: <%= loc.longitude %>};
+              var <%= 'marker' + loc.id.to_s %> = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: '<%= loc.address %>'
+              });
+              var <%= 'contentString' + loc.id.to_s %> = '<%= loc.address %>';
+
+                var <%= 'infowindow' + loc.id.to_s %> = new google.maps.InfoWindow({
+                  content: <%= 'contentString' + loc.id.to_s %>
+                });
+                <%= 'marker' + loc.id.to_s %>.addListener('click', function() {
+                    <%= 'infowindow' + loc.id.to_s %>.open(map, <%= 'marker' + loc.id.to_s %>);
+                  });
+            <% end %>
+
+
+
+
+
+        heatmap = new google.maps.visualization.HeatmapLayer({
+          data: getPoints(),
+          map: map, 
+          radius: 50  // change to 10 if want it small
+        });
+      }
+
+      function toggleHeatmap() {
+        heatmap.setMap(heatmap.getMap() ? null : map);
+      }
+
+      function changeGradient() {
+        var gradient = [
+          'rgba(0, 255, 255, 0)',
+          'rgba(0, 255, 255, 1)',
+          'rgba(0, 191, 255, 1)',
+          'rgba(0, 127, 255, 1)',
+          'rgba(0, 63, 255, 1)',
+          'rgba(0, 0, 255, 1)',
+          'rgba(0, 0, 223, 1)',
+          'rgba(0, 0, 191, 1)',
+          'rgba(0, 0, 159, 1)',
+          'rgba(0, 0, 127, 1)',
+          'rgba(63, 0, 91, 1)',
+          'rgba(127, 0, 63, 1)',
+          'rgba(191, 0, 31, 1)',
+          'rgba(255, 0, 0, 1)'
+        ]
+        heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+      }
+
+      function changeRadius() {
+        heatmap.set('radius', heatmap.get('radius') ? null : 50);
+      }
+
+      function changeOpacity() {
+        heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
+      }
+
+      // Heatmap data: 500 Points
+      function getPoints() {
+        return [
+
+        new google.maps.LatLng(3.140092, 101.783974),
+        new google.maps.LatLng(3.138592, 101.782687),
+        new google.maps.LatLng(3.138333, 101.783706),
+        new google.maps.LatLng(3.142306, 101.781941),
+        new google.maps.LatLng(3.140533, 101.78152),
+        new google.maps.LatLng(3.137626, 101.781882),
+
+          
+          
+           <% Location.all.each do |loc| %>
+           new google.maps.LatLng(<%= loc.latitude %>, <%= loc.longitude %>),
+           
+           <% end %>
+           
+          
+          
+          
+          
+          
+          
+          
+        ];
+      }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["MAP_KEY"] %>&libraries=visualization&callback=initMap">
+    </script>
