@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :events
   end
-
+  
 
   post "/events/:id/join" => "events#join"
   post "/events/:id/leave" => "events#leave"

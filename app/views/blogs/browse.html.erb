@@ -6,7 +6,7 @@
 
         <!-- PAGE CONTENT -->
             <div class="col-md-8" id="each-blog-follow">
-                <h1>Browse</h1>
+                <h1>Browse Blog Posts</h1>
                 <% BlogEntry.all.each do |b|%>
                 <% if current_user.id != b.user_id %>
                     <div class="row">
