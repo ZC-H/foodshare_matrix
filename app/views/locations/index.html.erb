@@ -64,7 +64,7 @@
         map: map,
         title: '<%= loc.address %>'
       });
-      var <%= 'contentString' + loc.id.to_s %> = '<%= loc.address %>';
+      var <%= 'contentString' + loc.id.to_s %> = '<%= loc.address %> <br> <%= loc.events.length %> events here | <%= loc.score %> events in area';
 
         var <%= 'infowindow' + loc.id.to_s %> = new google.maps.InfoWindow({
           content: <%= 'contentString' + loc.id.to_s %>
