@@ -2,69 +2,86 @@
 
 
 <div class="container-fluid" id="background-all">
-    <div class="row profile">
+	<div class="row profile">
 
-        <!-- PAGE CONTENT -->
-        <div class="col-md-10">
-            <div class="profile-content">
-            			<div id="postlist" id="post-box">
-                            <div class="panel" id="post-border">
-                                <div class="panel-heading">
-                                    <div class="text-center">
-                                        <div class="row">
-                                            <div class="col-sm-9">
-                                                <h3 class="pull-left"><%= @event.name %></h3>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <h4 class="pull-right">
-                                                <small><em><%= @event.updated_at.localtime.to_date %><br><%= @event.updated_at.localtime.strftime(" %H:%M:%S") %></em></small>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-	                            <div class="panel-body">
-	                                <p>Posted by: <%= @event.user.name %></p>
-									<p>Location name: <%= @event.location.name %></p>
+		<!-- PAGE CONTENT -->
+		<div class="col-md-10">
+			<div class="profile-content">
+						<div id="postlist" id="post-box">
+							<div class="panel" id="post-border">
+								<div class="panel-heading">
+									<div class="text-center">
+										<div class="row">
+											<div class="col-sm-9">
+												<h3 class="pull-left"><%= @event.name %></h3>
+											</div>
+											<div class="col-sm-3">
+												<h4 class="pull-right">
+												<small><em><%= @event.updated_at.localtime.to_date %><br><%= @event.updated_at.localtime.strftime(" %H:%M:%S") %></em></small>
+												</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="panel-body">
+									<p>Posted by: <%= @event.user.name %></p>
+									<% if @event.location.name %>
+										<p>Location name: <%= @event.location.name %></p>
+									<% end %>
 									<p>Event description: <%= @event.description %></p>
 									<p>Location address: <%= @event.location.address %></p>
 									<p>Estimated number of people from your group: <%= @event.expected %></p>
 									<p>Estimated servings of food brought: <%= @event.food_amount %></p>
 									<p>Date: <%= @event.date %></p>
-									<p>Start time: <%= @event.start_time %></p>
-									<p>End time: <%= @event.end_time %></p>
-									
+									<% if @event.start_time %>
+									   <p>Start time: <%= @event.start_time %></p>
+									<% end %>
+									<% if @event.end_time %>
+									   <p>End time: <%= @event.end_time %></p>
+									<% end %>
 									<p>Posted by: <%= @event.user.email %></p>
-                                    <p><%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@event.location.latitude},#{@event.location.longitude}&markers=#{@event.location.latitude},#{@event.location.longitude}&zoom=17&size=940x400&key=#{ENV['MAPS_KEY']}", class: 'img-fluid img-rounded', alt: "Event Location Preview" %></p>
-									<% if current_user.id == @event.user.id %>
+									<p><%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@event.location.latitude},#{@event.location.longitude}&markers=#{@event.location.latitude},#{@event.location.longitude}&zoom=17&size=940x400&key=AIzaSyDcXbsgRxNKHEbdqU6WUdLA4vhUDbRPA9U",
+										 class: 'img-fluid img-rounded', alt: "Event Location Preview" %></p>
 
+									<% if current_user.id == @event.user.id %>
 									<p><%= link_to "Edit this event", edit_event_path(@event), :class => 'btn btn-primary btn-lg' %>
-					                   <%= link_to "Delete this event", event_path(@event), :class => 'btn btn-primary btn-lg', method: :delete, data: {confirm: "Are you sure you want to delete this event?"} %></p>
+									   <%= link_to "Delete this event", event_path(@event), :class => 'btn btn-primary btn-lg', method: :delete, data: {confirm: "Are you sure you want to delete this event?"} %></p>
+									<% else %>
+                    <% if !@event.attender_ids.include?(current_user.id) %>
+                        <%= form_tag '/events/' + @event.id.to_s + '/join' do %>
+                            <input type=submit class="btn btn-success btn-lg" value="Join Event">
+                        <% end %>
+                    <% else %>
+                       <%= form_tag '/events/' + @event.id.to_s + '/leave' do %>
+                          <input type=submit class="btn btn-danger btn-lg" value="Leave Event">
+                        <% end %>
+                    <% end %>
+
 
 									<% end %>
-	                            </div>
-                       		 </div>
+								</div>
+					   		 </div>
 
-                        </div>
+						</div>
 
 			
 
-              
+			  
 
-            
+			
 
-            </div>
-        </div>
+			</div>
+		</div>
 
 
 
-    </div>
+	</div>
 </div>
 
 
 <div class="container-fluid">
-    <div class="footer">
-        <strong> © 2018 by <a href="https://www.nextacademy.com">Next Academy</a></strong>
-    </div>
+	<div class="footer">
+		<strong> © 2018 by <a href="https://www.nextacademy.com">Next Academy</a></strong>
+	</div>
 </div>

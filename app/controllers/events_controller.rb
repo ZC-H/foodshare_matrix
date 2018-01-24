@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-	before_action	:find_event, only: [:show, :edit, :update, :destroy]
+	before_action	:find_event, only: [:show, :edit, :update, :destroy, :join, :leave]
 	def find_event
 		@event = Event.find_by_id(params[:id])
 		if !@event
@@ -74,7 +74,13 @@ class EventsController < ApplicationController
 		render 'events/search'
 	end
 
+	def join
+		@event.attender_ids << current_user.id
+		@event.save
+	end
 
+	def leave
+	end
 
 	private
 	def event_params

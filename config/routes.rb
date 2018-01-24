@@ -8,12 +8,17 @@ Rails.application.routes.draw do
       controller: "clearance/passwords",
       only: [:create, :edit, :update]
   end
-
+  post "/users/:id/follow" => "users#follow"
+  post "/users/:id/unfollow" => "users#unfollow"
 
 
   resources :users do
     resources :events
   end
+  
+
+  post "/events/:id/join" => "events#join"
+  post "/events/:id/leave" => "events#leave"
 
   root "static#homedash"
 

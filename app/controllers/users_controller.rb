@@ -56,7 +56,7 @@ class UsersController < Clearance::UsersController
 			return "You are already following this user."
 		end
 		current_user.followtarget_joins.create({followtarget_id: params[:id]})
-		redirect back
+		#Need to refresh page
 	end
 
 	def unfollow
@@ -66,7 +66,7 @@ class UsersController < Clearance::UsersController
 		end
 		join = current_user.followtarget_joins.find_by(followtarget_id: params[:id])
 		join.delete
-		redirect back
+
 	end
 
 	private

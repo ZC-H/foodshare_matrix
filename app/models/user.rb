@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :followtargets, through: :followtarget_joins, source: :followtarget
 
   # ==========================================================
+  has_many :event_attends
+  has_many :attendings, through: :event_attends, source: :event
 
 mount_uploader :avatar, AvatarUploader
 end
