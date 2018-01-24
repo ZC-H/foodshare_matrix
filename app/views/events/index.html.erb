@@ -27,7 +27,7 @@
 									</h4>
 									<small><%= event.updated_at.localtime.to_date %><br><%= event.updated_at.localtime.strftime(" %H:%M:%S") %></small>
 									<h4><%= link_to event.name, event_path(event) %></h4>
-									<h4>Location:<%= event.location.name %></h4>
+									<h4>Location: <%= event.location.name %></h4>
 									<button type="button" class="btn btn-success btn-sm">Attend Event</button>
 									<hr>
 									<p id="description"><%= event.description %></p>

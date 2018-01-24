@@ -33,7 +33,7 @@ ActiveRecord::Base.transaction do
   20.times do 
     location['longitude'] = rand(101.59218549728394..101.7329478263855)
     location['latitude'] = rand(3.0575535085883843..3.207018557474082)
-    location['name'] = Faker::App.name
+    location['name'] = Faker::Address.street_address 
     Location.create(location)
   end
 end
@@ -49,7 +49,7 @@ ActiveRecord::Base.transaction do
   40.times do 
     event['date'] = Date.today - 10 + rand(1..30)
 		event['name'] = Faker::RockBand.name
-    event['description'] = Faker::Hipster.sentence
+    event['description'] = Faker::Lorem.paragraph(10)
     event['location_id'] = locids.sample  	
     event['user_id'] = uids.sample
     event['expected'] = rand(1..60)
@@ -63,7 +63,7 @@ blog_entry = {}
 ActiveRecord::Base.transaction do
   40.times do 
     blog_entry['title'] = Faker::Pokemon.name
-    blog_entry['description'] = Faker::Hipster.sentence
+    blog_entry['description'] = Faker::Lorem.paragraph(10)
     blog_entry['user_id'] = uids.sample
     BlogEntry.create(blog_entry)
   end
