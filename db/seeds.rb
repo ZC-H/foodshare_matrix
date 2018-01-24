@@ -57,3 +57,14 @@ ActiveRecord::Base.transaction do
     Event.create(event)
   end
 end
+
+
+blog_entry = {}
+ActiveRecord::Base.transaction do
+  40.times do 
+    blog_entry['title'] = Faker::Pokemon.name
+    blog_entry['description'] = Faker::Hipster.sentence
+    blog_entry['user_id'] = uids.sample
+    BlogEntry.create(blog_entry)
+  end
+end

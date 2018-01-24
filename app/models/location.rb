@@ -34,4 +34,12 @@ class Location < ApplicationRecord
 		evs_within
 	end
 
+	def events_within_timeless(distance)
+		evs = []
+		evs += self.events
+		near = self.nearbys(distance)
+		near.each { |nearloc| evs += nearloc.events } #make array of all nearby events
+		evs
+	end
+
 end

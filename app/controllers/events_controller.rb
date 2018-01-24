@@ -9,7 +9,16 @@ class EventsController < ApplicationController
 	end
 
 	def index
-		@events = Event.all.order("updated_at DESC")
+		@filtered = Event.filter(params.slice(:date, :user, :from_date, :to_date))
+		@events = @filtered
+		if params[:latitude] && params[:longitude]
+			loc = Location.new(latitude: params[:latitude][0].to_f, longitude: params[:longitude][0].to_f)
+			p loc
+			nearvents = loc.events_within_timeless(params[:radius][0].to_f)
+			p nearvents
+			p @events
+			@events = @events & nearvents
+		end		
 	end
 
 	#def new
